@@ -1,4 +1,5 @@
 from flask import Flask, Response, request, jsonify
+from flask_cors import CORS  # ✅ لإتاحة الوصول من تطبيقات الويب
 import cv2
 import requests
 import threading
@@ -15,6 +16,7 @@ if not os.path.exists(MODEL_PATH):
     gdown.download("https://drive.google.com/uc?export=download&id=1MhhJANrwUMM3gCa4Si0kp7n0yhrLwDM7", MODEL_PATH, quiet=False)
 
 app = Flask(__name__)
+CORS(app)  # ✅ تفعيل CORS لتجنب مشاكل الوصول من المتصفح أو Flutter Web
 
 model = YOLO(MODEL_PATH)
 
